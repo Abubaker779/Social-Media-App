@@ -1,0 +1,51 @@
+{% extends "network/layout.html" %} {% block body %}
+<div id="show-latest-post"></div>
+
+{% endblock %} {% block posts_js %}
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+  function Post() {
+    return (
+      <>
+        <h3>All Posts</h3>
+        <div className="add-new-post p-3 m-3 border col-md-4 rounded-lg">
+          <h6>New Post</h6>
+          <form method="POST" action="{post}">
+            <textarea
+              className="form-control"
+              rows={4}
+              name="body"
+              defaultValue={""}
+            />
+            <input
+              className="btn btn-primary p-2 m-2"
+              defaultValue="Post"
+              type="submit"
+            />
+          </form>
+        </div>
+      </>
+    );
+  }
+  function App() {
+    const { useState } = React;
+    const [count, setCount] = useState(0);
+    function counter() {
+      setCount(count + 1);
+    }
+    return (
+      <div>
+        <div>
+          <Post/>
+        </div>
+        <h1>{count}</h1>
+        <button onClick={counter}>Count</button>
+      </div>
+    );
+  }
+  ReactDOM.render(<App />, document.querySelector("#show-latest-post"));
+</script>
+{% endblock %}
